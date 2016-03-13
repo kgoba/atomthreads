@@ -30,6 +30,9 @@
 #ifndef __ATOM_PORT_PRIVATE_H
 #define __ATOM_PORT_PRIVATE_H
 
+/* enable default System Tick interrupt on Timer 1 */
+#define USE_DEFAULT_TICK_TIMER
+    
 /* CPU Frequency */
 #define AVR_CPU_HZ          1000000
 

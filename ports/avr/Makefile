@@ -11,17 +11,17 @@
 # Location of build tools and atomthreads sources
 KERNEL_DIR=../../kernel
 TESTS_DIR=../../tests
-CC=/usr/bin/avr-gcc
-OBJCOPY=/usr/bin/avr-objcopy
-SIZE=/usr/bin/avr-size
-UISP=/usr/bin/uisp
-SIMAVR=/usr/local/bin/simavr
+CC=avr-gcc
+OBJCOPY=avr-objcopy
+SIZE=avr-size
+UISP=uisp
+SIMAVR=simavr
 
 # Modify this to the device name of the UART used for UISP
 UISP_DEV=/dev/ttyUSB0
 
 # Modify this to the CPU you are using
-PART=atmega16
+PART=atmega328p
 
 # Enable stack-checking. WARNING: the full automated test suite currently
 # requires a little over 1KB RAM with stack-checking enabled. If you are 

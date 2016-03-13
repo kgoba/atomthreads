@@ -268,6 +268,8 @@ void archThreadContextInit (ATOM_TCB *tcb_ptr, void *stack_top, void (*entry_poi
 }
 
 
+#ifdef USE_DEFAULT_TICK_TIMER
+
 /**
  * \b avrInitSystemTickTimer
  *
@@ -336,6 +338,7 @@ ISR (TIMER1_COMPA_vect)
     atomIntExit(TRUE);
 }
 
+#endif // #ifdef USE_DEFAULT_TICK_TIMER
 
 /**
  *
