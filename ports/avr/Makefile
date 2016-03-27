@@ -59,7 +59,7 @@ vpath %.elf ./$(BUILD_DIR)
 vpath %.hex ./$(BUILD_DIR)
 
 # GCC flags
-CFLAGS=-g -mmcu=$(PART) -Wall -Werror
+CFLAGS=-g -Os -mmcu=$(PART) -Wall -Werror
 
 # Enable stack-checking options (disable if not required)
 ifeq ($(STACK_CHECK),true)
