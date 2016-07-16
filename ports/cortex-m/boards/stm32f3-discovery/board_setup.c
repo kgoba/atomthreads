@@ -89,17 +89,18 @@ static void clock_setup(void)
     rcc_osc_on(HSE);
     rcc_wait_for_osc_ready(HSE);
     
+    //rcc_set_pll_multiplier(9);
+    rcc_set_main_pll_hsi(RCC_CFGR_PLLMUL_PLL_IN_CLK_X9);
     rcc_set_pll_source(RCC_CFGR_PLLSRC_HSE_PREDIV);
-    rcc_set_pll_multiplier(9);
-    rcc_osc_on(RCC_PLL);
-    rcc_wait_for_osc_ready(RCC_PLL);
+    rcc_osc_on(PLL);
+    rcc_wait_for_osc_ready(PLL);
     
     rcc_set_hpre(1);
     rcc_set_ppre2(1);
     rcc_set_ppre1(2);
     rcc_usb_prescale_1_5();
     rcc_set_sysclk_source(RCC_CFGR_SW_PLL);
-    rcc_wait_for_sysclk_status(RCC_PLL);
+    rcc_wait_for_sysclk_status(PLL);
     
     rcc_ahb_frequency   = 72000000;
     rcc_apb1_frequency  = 36000000;
