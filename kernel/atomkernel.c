@@ -241,10 +241,11 @@ void atomSched (uint8_t timer_tick)
     CRITICAL_START ();
 
     /**
-     * If the current thread is going into suspension, then
-     * unconditionally dequeue the next thread for execution.
+     * If the current thread is going into suspension or is being
+     * terminated (run to completion), then unconditionally dequeue
+     * the next thread for execution.
      */
-    if (curr_tcb->suspended == TRUE)
+    if ((curr_tcb->suspended == TRUE) || (curr_tcb->terminated == TRUE))
     {
         /**
          * Dequeue the next ready to run thread. There will always be
@@ -332,6 +333,13 @@ void atomSched (uint8_t timer_tick)
 static void atomThreadSwitch(ATOM_TCB *old_tcb, ATOM_TCB *new_tcb)
 {
     /**
+     * The context switch will shift execution to a different thread. The
+     * new thread is now ready to run so clear its suspend status in
+     * preparation for it waking up.
+     */
+    new_tcb->suspended = FALSE;
+
+    /**
      * Check if the new thread is actually the current one, in which
      * case we don't need to do any context switch. This can happen
      * if a thread goes into suspend but is unsuspended again before
@@ -341,13 +349,6 @@ static void atomThreadSwitch(ATOM_TCB *old_tcb, ATOM_TCB *new_tcb)
     {
         /* Set the new currently-running thread pointer */
         curr_tcb = new_tcb;
-
-        /**
-         * The context switch will shift execution to a different thread. The
-         * new thread is now ready to run so clear its suspend status in
-         * preparation for it waking up.
-         */
-        new_tcb->suspended = FALSE;
 
         /* Call the architecture-specific context switch */
         archContextSwitch (old_tcb, new_tcb);
