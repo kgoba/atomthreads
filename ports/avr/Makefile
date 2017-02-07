@@ -60,6 +60,8 @@ vpath %.hex ./$(BUILD_DIR)
 
 # GCC flags
 CFLAGS=-g -Os -mmcu=$(PART) -Wall -Werror
+CFLAGS += -ffunction-sections -fdata-sections
+LFLAGS=-Wl,--gc-sections
 
 # Enable stack-checking options (disable if not required)
 ifeq ($(STACK_CHECK),true)
@@ -88,7 +90,7 @@ $(TEST_HEXS): %.hex: %.elf
 
 # Test ELF files (one application build for each test)
 $(TEST_ELFS): %.elf: %.o $(KERNEL_OBJECTS) $(APP_OBJECTS) $(APP_ASM_OBJECTS)
-	$(CC) $(CFLAGS) $(BUILD_DIR)/$(notdir $<) $(BUILT_OBJECTS) --output $(BUILD_DIR)/$@ -Wl,-Map,$(BUILD_DIR)/$(basename $@).map
+	$(CC) $(CFLAGS) $(LFLAGS) $(BUILD_DIR)/$(notdir $<) $(BUILT_OBJECTS) --output $(BUILD_DIR)/$@ -Wl,-Map,$(BUILD_DIR)/$(basename $@).map
 
 # Kernel objects builder
 $(KERNEL_OBJECTS): %.o: $(KERNEL_DIR)/%.c
