@@ -319,6 +319,7 @@
 #define DM36X_PSC_MDSTAT_BASE   0x800
 #define DM36X_PSC_MDCTL_BASE    0xA00
 #define DM36X_PSC_MOD_SPI1      6
+#define DM36X_PSC_MOD_MCBSP     8
 #define DM36X_PSC_MOD_SPI2      11
 #define DM36X_PSC_MOD_I2C       18
 #define DM36X_PSC_MOD_SPI0      22
@@ -566,6 +567,26 @@
 #define DM36X_SD_SDIOIEN    0X6C
 #define DM36X_SD_SDIOIST    0X70
 #define DM36X_SD_MMCFIFOCTL 0x74
+
+
+/** McBSP registers */
+#define DM36X_MCBSP_BASE    0x01D02000 /* McBSP */
+#define DM36X_MCBSP_DRR     0x00
+#define DM36X_MCBSP_DXR     0x04
+#define DM36X_MCBSP_SPCR    0x08
+#define DM36X_MCBSP_RCR     0x0C
+#define DM36X_MCBSP_XCR     0x10
+#define DM36X_MCBSP_SRGR    0x14
+#define DM36X_MCBSP_MCR     0x18
+#define DM36X_MCBSP_RCERE0  0x1C
+#define DM36X_MCBSP_XCERE0  0x20
+#define DM36X_MCBSP_PCR     0x24
+#define DM36X_MCBSP_RCERE1  0x28
+#define DM36X_MCBSP_XCERE1  0x2C
+#define DM36X_MCBSP_RCERE2  0x30
+#define DM36X_MCBSP_XCERE2  0x34
+#define DM36X_MCBSP_RCERE3  0x38
+#define DM36X_MCBSP_XCERE3  0x3C
 
 
 /* Function prototypes */
