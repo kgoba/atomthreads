@@ -28,10 +28,7 @@
  */
 
 
-#include <avr/interrupt.h>
-
 #include "atom.h"
-#include "atomport-private.h"
 
 
 /** Forward declarations */
@@ -268,20 +265,3 @@ void archThreadContextInit (ATOM_TCB *tcb_ptr, void *stack_top, void (*entry_poi
 
 }
 
-
-/**
- *
- * Default (no handler installed) ISR.
- *
- * Installs a default handler to be called if any interrupts occur for
- * which we have not registered an ISR. This is empty and has only been
- * included to handle user-created code which may enable interrupts. The
- * core OS does not enable any interrupts other than the system timer
- * tick interrupt.
- *
- * @return None
- */
-ISR (BADISR_vect)
-{
-    /* Empty */
-}
